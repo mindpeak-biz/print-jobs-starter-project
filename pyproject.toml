@@ -1,7 +1,7 @@
 [project]
-name = "print-jobs-starter"
+name = "print-jobs-starter-project"
 version = "0.1.0"
-description = "FastAPI/SQLModel example for VLC team"
+description = "FastAPI/SQLModel example for VLC team that can be used as a starter project for the Print Jobs microservice"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
