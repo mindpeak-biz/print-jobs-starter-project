@@ -1,0 +1,11 @@
+[project]
+name = "print-jobs-starter"
+version = "0.1.0"
+description = "FastAPI/SQLModel example for VLC team"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.14",
+    "sqlmodel>=0.0.24",
+    "uvicorn>=0.31.1",
+]
