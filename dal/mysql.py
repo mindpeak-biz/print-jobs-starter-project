@@ -3,13 +3,23 @@
 
 
 # Project imports ------------------------------------------------------
+import os
+from dotenv import load_dotenv
 from models.models import PrintJob, Partner, Citation, PrintJobCitationLink
 from sqlmodel import SQLModel, Session, create_engine, select
 
 
+# Environment variables -----------------------------------------------
+load_dotenv()
+
+# Now you can access the variables using os.environ
+DATABASE_URL = os.environ.get("DATABASE_URL")
+# --------------------------------------------------------------------- 
+
+
 # Set up the database --------------------------------------------------
 # Create the SQLite database engine (change the URL to MySQL later)
-engine = create_engine("sqlite:///printjobs.db")
+engine = create_engine(DATABASE_URL)
 SQLModel.metadata.create_all(engine)
 
 def get_session():
