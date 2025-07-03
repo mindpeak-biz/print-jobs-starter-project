@@ -19,6 +19,7 @@ Sync the dependencies in your toml file with uv.lock (as needed) => % uv sync
 
 If manually activating virtualenv:
 Activate the virtual environment => % source .venv/bin/activate
+
 Run the app using uvicorn => % uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 You can view the API documentation and can exercise the endpoints here:  http://localhost:8000/doc 
