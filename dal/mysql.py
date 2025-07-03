@@ -1,3 +1,8 @@
+# This file is part of the DAL (Data Access Layer) for the Print Jobs Starter Project.
+# It provides functions to interact with the MySQL database for managing print jobs, partners, and citations.
+
+
+# Project imports ------------------------------------------------------
 from models.models import PrintJob, Partner, Citation, PrintJobCitationLink
 from sqlmodel import SQLModel, Session, create_engine, select
 
@@ -24,6 +29,8 @@ def create_print_job(print_job: PrintJob) -> PrintJob:
 def get_all_print_jobs() -> list[PrintJob]:
     session = next(get_session())
     print_jobs = session.exec(select(PrintJob)).all()
+    if not print_jobs:
+        return []
     return print_jobs
 
 

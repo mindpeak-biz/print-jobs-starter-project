@@ -1,5 +1,6 @@
 from models.models import PrintJob, Partner, Citation, PrintJobCitationLink
-from dal import mysql as dal
+from dal import mysql as dal    # Uncomment this line to use MySQL instead of DynamoDB
+# from dal import dynamo as dal   # Uncomment this line to use DynamoDB instead of MySQL
 
 
 def create_print_job(print_job: PrintJob) -> PrintJob:
