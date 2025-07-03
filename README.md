@@ -1,5 +1,5 @@
 To set up your local environment, ensure you have uv installed. 
-You can install it with Homebrew => % brew install uv
+You can install it with pip (Python's default package manager) => % pip install uv
 
 Database:
 This project uses Sqlite by default, but you can use MySQL by changing the database url following line in the mysql.py file:
