@@ -2,58 +2,39 @@
 from typing import Optional
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException
-from models.models import Printjob, Partner, Citation, PrintjobCitationLink
+from models.models import PrintJob, Partner, Citation, PrintJobCitationLink
 from sqlmodel import SQLModel, Session, create_engine
+from bl.db_access import get_all_print_jobs, get_print_job, create_print_job
 # --------------------------------------------------------------------- 
 
 
-# Set up the database --------------------------------------------------
-# Create the SQLite database engine (change the URL to MySQL later)
-engine = create_engine("sqlite:///printjobs.db")
-SQLModel.metadata.create_all(engine)
-
-
-# Get the session (this will be injected as a dependency for our FastAPI routes)
-def get_session():
-    with Session(engine) as session:
-        yield session
-# --------------------------------------------------------------------- 
-
-
-# Create and configure the app ----------------------------------------
 app = FastAPI()
-# --------------------------------------------------------------------- 
 
 
 # ROUTES ---------------------------------------------------------------
-# Create a Printjob
-@app.post("/printjobs", response_model=Printjob)
-def create_printjob(printjob: Printjob, session: Session = Depends(get_session)):
-    session.add(printjob)
-    session.commit()
-    session.refresh(printjob)
-    return printjob
+# Create a Print job
+@app.post("/printjobs", response_model=PrintJob)
+def create_print_job(print_job: PrintJob):
+    print_job = create_print_job(print_job)
+    return print_job
 
 
 # Get all print jobs 
-@app.get("/printjobs", response_model=list[Printjob])
-def get_all_printjobs(
-    skip: int = 0, limit: int = 10, session: Session = Depends(get_session)
-):
-    printjobs = session.exec(select(Printjob).offset(skip).limit(limit)).all()
-    return printjobs
+@app.get("/printjobs", response_model=list[PrintJob])
+def get_all_print_jobs():
+    print_jobs = get_all_print_jobs()
+    return print_jobs
 
 
 # Get a print job by id 
-@app.get("/printjobs/{printjob_id}", response_model=Printjob)
-def get_printjob_by_id(printjob_id: int, session: Session = Depends(get_session)):
-    printjob = session.get(Printjob, printjob_id)
-    if not printjob:
-        raise HTTPException(status_code=404, detail="Printjob not found")
-    return printjob
+@app.get("/printjobs/{print_job_id}", response_model=PrintJob)
+def get_print_job(print_job_id: int):
+    print_job = get_print_job(print_job_id)
+    if not print_job:
+        raise HTTPException(status_code=404, detail=f"Print job id: {print_job_id} not found")
+    return print_job
 
 
-# --------------------------------------------------------------------- 
 # TODO: Add the following routes for print job management starter project 
 
 # Get all print jobs by partner id (need partner id)

@@ -102,7 +102,7 @@ wheels = [
 ]
 
 [[package]]
-name = "print-jobs-starter"
+name = "print-jobs-starter-project"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
