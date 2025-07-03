@@ -13,8 +13,9 @@ Running the project:
 --------------------
 
 With uv (it replaces pip, piptools, poetry, and more):
-Sync the dependencies in your toml file with uv.lock (as needed) => % uv sync
 % uv run main.py
+
+Sync the dependencies in your toml file with uv.lock (as needed) => % uv sync
 
 If manually activating virtualenv:
 Activate the virtual environment => % source .venv/bin/activate
